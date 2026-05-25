@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aftab Shaukat | Builder of Data, Operations & Marketplace Systems</title>
+  <meta name="description" content="Official portfolio of Aftab Shaukat — building DIRT, AYNAMATE, and Masla Yeh Hai across healthcare intelligence, local services, and public education." />
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171b22;
+      --panel2: #11151b;
+      --text: #f5f1e8;
+      --muted: #b9b0a2;
+      --line: rgba(245,241,232,.12);
+      --gold: #d3a85c;
+      --green: #6cae75;
+      --blue: #6ca8ff;
+      --pink: #ff8bc7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, rgba(211,168,92,.16), transparent 32%), var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: auto; }
+    header { padding: 26px 0; border-bottom: 1px solid var(--line); }
+    nav { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .brand { font-weight: 800; letter-spacing: -.02em; }
+    .navlinks { display: flex; gap: 18px; color: var(--muted); font-size: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    .hero { padding: 86px 0 60px; }
+    .eyebrow { color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: 13px; }
+    h1 { font-size: clamp(40px, 7vw, 76px); line-height: .98; margin: 18px 0 24px; letter-spacing: -.06em; max-width: 940px; }
+    .lead { font-size: clamp(18px, 2.2vw, 23px); color: var(--muted); max-width: 780px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+    .btn { border: 1px solid var(--line); padding: 13px 18px; border-radius: 999px; font-weight: 700; background: rgba(255,255,255,.04); }
+    .btn.primary { background: var(--text); color: #111; }
+    section { padding: 48px 0; }
+    .section-title { font-size: 28px; margin: 0 0 20px; letter-spacing: -.03em; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: linear-gradient(180deg, var(--panel), var(--panel2)); border: 1px solid var(--line); border-radius: 24px; padding: 24px; min-height: 260px; display: flex; flex-direction: column; justify-content: space-between; }
+    .tag { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .card h3 { margin: 14px 0 8px; font-size: 26px; letter-spacing: -.04em; }
+    .card p { color: var(--muted); margin: 0; }
+    .meta { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; margin: 5px 6px 0 0; color: var(--muted); font-size: 13px; }
+    .two { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; align-items: stretch; }
+    .panel { background: rgba(255,255,255,.035); border: 1px solid var(--line); border-radius: 24px; padding: 26px; }
+    footer { padding: 36px 0; border-top: 1px solid var(--line); color: var(--muted); }
+    @media (max-width: 840px) { .grid, .two { grid-template-columns: 1fr; } nav { align-items: flex-start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="/">Aftab Shaukat</a>
+        <div class="navlinks">
+          <a href="#projects">Projects</a>
+          <a href="#focus">Focus</a>
+          <a href="mailto:hello@aftabshaukat.me">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">Official portfolio</div>
+        <h1>Building data, operations, and marketplace systems with practical intelligence.</h1>
+        <p class="lead">I am Aftab Shaukat, a healthcare RCM and operations systems builder creating focused products across revenue intelligence, local service discovery, and public education.</p>
+        <div class="actions">
+          <a class="btn primary" href="mailto:hello@aftabshaukat.me">Contact me</a>
+          <a class="btn" href="https://github.com/aashaukatc">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <h2 class="section-title">Active projects</h2>
+        <div class="grid">
+          <article class="card">
+            <div>
+              <div class="tag" style="color: var(--blue);">Healthcare intelligence</div>
+              <h3>DIRT</h3>
+              <p>Data Intelligence for Revenue Transformation — a healthcare RCM audit, analytics, and intelligence platform focused on cleaner decisions, stronger collections, and operational clarity.</p>
+              <div class="meta">Domain: <a href="https://dirtrcm.app">dirtrcm.app</a><br>Email: security@dirtrcm.app</div>
+            </div>
+            <div>
+              <span class="pill">RCM</span><span class="pill">Analytics</span><span class="pill">B2B</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="tag" style="color: var(--pink);">Beauty & wellness</div>
+              <h3>AYNAMATE</h3>
+              <p>A Foodpanda-inspired discovery and connection platform for beauty, aesthetics, wellness, fitness, salons, clinics, and independent professionals.</p>
+              <div class="meta">Domain: <a href="https://aynamate.life">aynamate.life</a><br>Email: support@aynamate.life</div>
+            </div>
+            <div>
+              <span class="pill">Marketplace</span><span class="pill">Local services</span><span class="pill">Android/Web</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="tag" style="color: var(--green);">Media & education</div>
+              <h3>Masla Yeh Hai</h3>
+              <p>A Pakistan-first media and education platform focused on real public problems, practical awareness, social questions, and civic learning.</p>
+              <div class="meta">Domain: <a href="https://maslayehhai.com">maslayehhai.com</a><br>Email: community@maslayehhai.com</div>
+            </div>
+            <div>
+              <span class="pill">Media</span><span class="pill">Education</span><span class="pill">Community</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="focus">
+      <div class="wrap">
+        <div class="two">
+          <div class="panel">
+            <h2 class="section-title">Operating focus</h2>
+            <p class="lead">My work combines revenue cycle operations, product systems, process optimization, analytics, and AI-assisted execution.</p>
+          </div>
+          <div class="panel">
+            <h2 class="section-title">Contact</h2>
+            <p>For business, collaboration, or project inquiries:</p>
+            <p><strong><a href="mailto:hello@aftabshaukat.me">hello@aftabshaukat.me</a></strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2026 Aftab Shaukat. All rights reserved.</div>
+  </footer>
+</body>
+</html>
