@@ -1,0 +1,10 @@
+@misc{Shaukat2026RemoteRCM,
+  author       = {Aftab Shaukat},
+  title        = {U.S. Remote Monitoring RCM Architecture (RPM/RTM/Ambient)},
+  year         = {2026},
+  month        = {may},
+  day          = {27},
+  howpublished = {Web research asset},
+  url          = {https://aftabshaukat.me/remote-monitoring-rcm-architecture.html},
+  note         = {Accessed 2026-05-27}
+}
