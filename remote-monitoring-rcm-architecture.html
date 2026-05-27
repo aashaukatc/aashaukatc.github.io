@@ -123,9 +123,95 @@
         .matrix-table th {
             vertical-align: top;
         }
+        .progress-track {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            z-index: 70;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #d3a85c, #7bb6ff);
+            box-shadow: 0 0 12px rgba(123, 182, 255, 0.45);
+            transition: width 0.08s linear;
+        }
+        .glass-hero-card {
+            background: linear-gradient(135deg, rgba(34, 42, 55, 0.72), rgba(23, 27, 34, 0.78));
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1rem;
+            backdrop-filter: blur(12px);
+        }
+        .infographic-node {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.9rem;
+        }
+        .impact-meter {
+            position: relative;
+            height: 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+        .impact-meter > span {
+            display: block;
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #74b8ff, #d3a85c);
+        }
+        .quick-jump {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 55;
+            width: 46px;
+            height: 46px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(23, 27, 34, 0.82);
+            color: var(--text);
+            backdrop-filter: blur(10px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-chip {
+            display: inline-block;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #9fcdff;
+            border: 1px solid rgba(123, 182, 255, 0.3);
+            border-radius: 999px;
+            padding: 0.25rem 0.5rem;
+            margin-bottom: 0.7rem;
+        }
+        @media (max-width: 1024px) {
+            .quick-jump {
+                right: 14px;
+                bottom: 14px;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
+    <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
 
     <nav class="fixed w-full bg-white/95 backdrop-blur-md border-b border-slate-200 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -147,7 +233,7 @@
         </div>
     </nav>
 
-    <main class="pt-24 pb-12">
+    <main id="top" class="pt-24 pb-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
             <div class="text-center max-w-5xl mx-auto">
                 <span class="text-xs font-bold tracking-wider text-blue-700 uppercase bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Public Research Asset · U.S. Healthcare Practice Management</span>
@@ -162,10 +248,72 @@
                     <a href="#executive-summary" class="px-6 py-3 rounded-md text-white bg-blue-700 hover:bg-blue-800 shadow-sm transition-all">Start Brief</a>
                     <a href="/" class="px-6 py-3 rounded-md text-blue-800 bg-blue-50 border border-blue-100 hover:bg-blue-100">Back to Portfolio</a>
                 </div>
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                    <div class="glass-hero-card">
+                        <p class="text-xs uppercase tracking-wider text-slate-400">Signal Density</p>
+                        <p class="text-2xl font-bold text-slate-100 mt-1">68% Noise</p>
+                        <p class="text-xs text-slate-500 mt-1">Typical non-actionable event share before triage logic.</p>
+                    </div>
+                    <div class="glass-hero-card">
+                        <p class="text-xs uppercase tracking-wider text-slate-400">Revenue Risk</p>
+                        <p class="text-2xl font-bold text-slate-100 mt-1">CO-11 / CO-97</p>
+                        <p class="text-xs text-slate-500 mt-1">Most common denial signatures in remote-care workflows.</p>
+                    </div>
+                    <div class="glass-hero-card">
+                        <p class="text-xs uppercase tracking-wider text-slate-400">Control Plane</p>
+                        <p class="text-2xl font-bold text-slate-100 mt-1">837 + 835</p>
+                        <p class="text-xs text-slate-500 mt-1">Claim composition and remittance intelligence loop.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <section id="executive-summary" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="xfactor-overview" class="mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+                <span class="section-chip">Experience Layer</span>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">At-a-Glance Infographic Overview</h2>
+                <p class="text-slate-600 mb-6">A one-screen executive view of where value is created and where operational friction concentrates.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <div class="infographic-node">
+                        <p class="text-sm font-semibold text-slate-200 mb-2">Operational Complexity</p>
+                        <div class="space-y-3 text-xs text-slate-400">
+                            <div>
+                                <div class="flex justify-between mb-1"><span>RPM + RTM Coordination</span><span>High</span></div>
+                                <div class="impact-meter"><span style="width:85%"></span></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1"><span>Claim Rule Versioning</span><span>Very high</span></div>
+                                <div class="impact-meter"><span style="width:92%"></span></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1"><span>Clinical Triage Load</span><span>Medium</span></div>
+                                <div class="impact-meter"><span style="width:62%"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infographic-node">
+                        <p class="text-sm font-semibold text-slate-200 mb-2">Value Levers</p>
+                        <ul class="space-y-2 text-xs text-slate-400">
+                            <li>1. Artifact suppression before nurse queue ingestion</li>
+                            <li>2. Day-window eligibility logic for supply and management codes</li>
+                            <li>3. Real-time modifier and diagnosis compatibility checks</li>
+                            <li>4. ERA feedback loop to retrain billing logic</li>
+                        </ul>
+                    </div>
+                    <div class="infographic-node">
+                        <p class="text-sm font-semibold text-slate-200 mb-2">Strategic Outcome Track</p>
+                        <ul class="space-y-2 text-xs text-slate-400">
+                            <li><strong class="text-slate-200">Clinical:</strong> fewer missed true-positive events</li>
+                            <li><strong class="text-slate-200">Financial:</strong> faster collection cycles, lower denials</li>
+                            <li><strong class="text-slate-200">Institutional:</strong> publishable governance maturity</li>
+                            <li><strong class="text-slate-200">Reputation:</strong> trusted execution across care and revenue</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="executive-summary" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-12">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div class="col-span-1 md:col-span-2">
@@ -194,7 +342,7 @@
             </div>
         </section>
 
-        <section id="varieties" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="varieties" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-slate-900">1) Expanding the Varieties: RPM vs RTM</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">
@@ -227,7 +375,7 @@
             </div>
         </section>
 
-        <section id="executive-map" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="executive-map" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-slate-900">2) Executive Map: The Digital Health Thread</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">A single chain connects endpoint devices, intelligence filtering, clinical intervention, and U.S. reimbursement mechanics.</p>
@@ -260,7 +408,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="architecture" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="architecture" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-slate-900">3) Deep-Dive Architecture Matrix</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">Designing remote monitoring as a vendor platform requires domain separation across patient profiles, workforce, billing path, and regulatory supervision models.</p>
@@ -324,7 +472,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="lifecycle" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="lifecycle" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-slate-900">4) Structured Delivery Lifecycle</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">Remote monitoring profitability comes from consistency in enrollment, transmission-day qualification, triage quality, and documented intervention time.</p>
@@ -352,7 +500,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="billing" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="billing" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-slate-900">5) Billing Policy, Guidelines, and 2026 Trends</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">Policy change is active. Vendors need rule engines that can update without rewriting core workflow each quarter.</p>
@@ -415,7 +563,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="care-management" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="care-management" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-slate-900">6) CCM, PCM, TCM, and Other Care Management Services</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">Remote monitoring programs perform best when they are embedded inside broader care-management billing architecture. The table below adds national 2026 RVU context for planning, staffing, and margin modeling.</p>
@@ -518,7 +666,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="regulatory" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="regulatory" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-slate-900">7) NCD/LCD, CMS, and Regulator Governance</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">Coverage and payment are distinct decisions. Build your policy engine to evaluate national policy first (NCD), then MAC-level local policy (LCD and Billing/Coding Articles), then contract-specific edits.</p>
@@ -550,7 +698,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="edi" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="edi" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-slate-900">8) EDI Architecture: 837P, 837I, and 835 Mapping</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">The difference between high denial rates and predictable cash often lives in loop-level EDI precision.</p>
@@ -599,7 +747,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="authority" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="authority" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
                 <h2 class="text-3xl font-bold text-slate-900 mb-4">9) Authority, Trust, and Governance Layer</h2>
                 <p class="text-slate-600 mb-4">This blueprint is designed for practice-management and technology transformation teams building remote monitoring pipelines in the U.S. healthcare ecosystem.</p>
@@ -627,7 +775,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="simulator" class="mt-20 mb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="simulator" class="mt-20 mb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-slate-900">10) Interactive Financial Impact Simulator</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">Model expected annual impact from AI triage efficiency plus revenue-cycle recovery discipline for a remote monitoring vendor.</p>
@@ -684,7 +832,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="charts" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="charts" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-slate-900">11) Operational Signal Visuals</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">Two practical signals for executive teams: scaling economics and event composition.</p>
@@ -702,7 +850,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="build-path" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="build-path" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="mb-8 text-center">
                 <h2 class="text-3xl font-bold text-slate-900">12) Build Path for Vendor Integration</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl mx-auto">A staged transformation map for U.S. healthcare practices and remote-monitoring technology vendors.</p>
@@ -749,7 +897,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="publication-standards" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="publication-standards" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
                 <h2 class="text-3xl font-bold text-slate-900 mb-4">13) International Publication Standards and Academic Outcomes</h2>
                 <p class="text-slate-600 mb-5">For institutions using this blueprint as publishable research direction, the following are readiness targets for manuscript quality and governance. They are not a claim of current indexation, accreditation, or guaranteed acceptance.</p>
@@ -789,7 +937,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="orcid-pack" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="orcid-pack" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
                 <h2 class="text-3xl font-bold text-slate-900 mb-4">ORCID Publishing Pack and Scholarly Citation Layer</h2>
                 <p class="text-slate-600 mb-5">This section is designed to make the asset ORCID-ready and academically legible. It provides copy-ready metadata plus external evidence anchors. It is a quality signal layer, not a claim of journal indexation.</p>
@@ -842,7 +990,7 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
-        <section id="copyright-credits" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="copyright-credits" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
                 <h2 class="text-3xl font-bold text-slate-900 mb-4">Code-Set Copyright, Credits, and Compliance Notice</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700">
@@ -880,6 +1028,7 @@ Then -> US FINANCIAL REVENUE LAYER
             <p class="text-slate-500 text-xs mt-2">CPT copyright AMA. HCPCS Level II maintained by CMS (D-codes by ADA). MLN, MLN Connects, and MLN Matters are trademarks of HHS. Final billing decisions require active policy verification.</p>
         </div>
     </footer>
+    <a href="#top" class="quick-jump" aria-label="Back to top">↑</a>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1032,6 +1181,30 @@ Then -> US FINANCIAL REVENUE LAYER
             rcmSlider.addEventListener('input', calculateImpact);
 
             calculateImpact();
+
+            function updateProgressBar() {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                const progressBar = document.getElementById('progressBar');
+                if (progressBar) {
+                    progressBar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+                }
+            }
+
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            reveals.forEach((el) => observer.observe(el));
+
+            window.addEventListener('scroll', updateProgressBar, { passive: true });
+            updateProgressBar();
         });
     </script>
 </body>
