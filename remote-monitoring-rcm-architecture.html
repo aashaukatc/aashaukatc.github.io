@@ -5,10 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>U.S. Remote Monitoring RCM Architecture (RPM/RTM/Ambient) | Aftab Shaukat</title>
     <meta name="description" content="Strategic SPA covering U.S. remote patient monitoring (RPM), remote therapeutic monitoring (RTM), ambient safety monitoring, CPT/HCPCS logic, POS/modifiers, denial patterns, and EDI 837/835 architecture for healthcare practice transformation." />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="author" content="Aftab Shaukat" />
+    <meta name="theme-color" content="#080b12" />
     <link rel="canonical" href="https://aftabshaukat.me/remote-monitoring-rcm-architecture.html" />
-
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="U.S. Remote Monitoring RCM Architecture (RPM/RTM/Ambient)" />
+    <meta property="og:description" content="Strategic architecture for RPM, RTM, ambient monitoring, care-management billing integration, denial engineering, and EDI precision in U.S. healthcare." />
+    <meta property="og:url" content="https://aftabshaukat.me/remote-monitoring-rcm-architecture.html" />
+    <meta property="og:site_name" content="Aftab Shaukat" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="U.S. Remote Monitoring RCM Architecture (RPM/RTM/Ambient)" />
+    <meta name="twitter:description" content="Publication-ready strategic blueprint for RPM/RTM/ambient operations, policy logic, and claims architecture." />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "U.S. Remote Monitoring RCM Architecture (RPM/RTM/Ambient)",
+      "description": "Strategic SPA covering U.S. remote monitoring operations, policy, reimbursement, and EDI architecture.",
+      "author": {"@type": "Person", "name": "Aftab Shaukat"},
+      "publisher": {"@type": "Person", "name": "Aftab Shaukat"},
+      "datePublished": "2026-05-27",
+      "dateModified": "2026-05-27",
+      "mainEntityOfPage": "https://aftabshaukat.me/remote-monitoring-rcm-architecture.html",
+      "articleSection": ["Healthcare RCM", "Remote Monitoring", "RPM", "RTM", "EDI"],
+      "keywords": "RPM, RTM, remote monitoring billing, CPT, HCPCS, CCM, PCM, TCM, NCD, LCD, EDI 837, EDI 835"
+    }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet" />
@@ -20,7 +43,7 @@
             --panel-soft: rgba(17, 21, 27, 0.65);
             --line: rgba(245, 241, 232, 0.14);
             --text: #f5f1e8;
-            --muted: #b9b0a2;
+            --muted: #d2c9bc;
             --gold: #d3a85c;
             --blue: #7bb6ff;
         }
@@ -102,26 +125,34 @@
             font-weight: 600;
         }
         nav.main-nav {
-            background: rgba(13, 17, 24, 0.92) !important;
-            border-bottom: 1px solid var(--line) !important;
+            background: rgba(10, 14, 22, 0.94) !important;
+            border-bottom: 1px solid rgba(245, 241, 232, 0.2) !important;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
         }
         nav.main-nav a.text-slate-600 {
-            color: #e5ddd1 !important;
+            color: #f2ebde !important;
         }
         nav.main-nav a.text-slate-600:hover {
-            color: #b7d7ff !important;
+            color: #d8e9ff !important;
         }
         nav.main-nav a.text-blue-700 { color: #7bb6ff !important; }
-        nav.main-nav a.text-blue-900 { color: #f4efe5 !important; }
-        .px-6.py-3.rounded-md.text-blue-800 { color: #eaf4ff !important; }
-        .px-6.py-3.rounded-md.text-blue-800:hover { color: #ffffff !important; }
+        nav.main-nav a.text-blue-900 { color: #f8f2e8 !important; }
+        .px-6.py-3.rounded-md.text-blue-800 { color: #f7fbff !important; font-weight: 700; }
+        .px-6.py-3.rounded-md.text-blue-800:hover { color: #ffffff !important; background: rgba(123, 182, 255, 0.2) !important; }
         .quick-jump { color: #f8f3ea !important; }
-        thead.bg-slate-100 {
-            background: rgba(60, 78, 106, 0.72) !important;
+        thead.bg-slate-100,
+        table thead,
+        table thead tr {
+            background: rgba(54, 71, 96, 0.86) !important;
         }
-        thead.bg-slate-100 th {
-            color: #eef5ff !important;
+        thead.bg-slate-100 th,
+        table thead th {
+            color: #f6f8ff !important;
             font-weight: 700;
+            border-bottom: 1px solid rgba(245, 241, 232, 0.26);
+        }
+        table tbody td {
+            color: #ebe4d8 !important;
         }
         .chart-container {
             position: relative;
@@ -222,7 +253,8 @@
         }
     </style>
 </head>
-<body class="antialiased"><nav class="main-nav fixed w-full bg-white/95 backdrop-blur-md border-b border-slate-200 z-50 shadow-sm">
+<body class="antialiased">
+    <nav class="main-nav fixed w-full backdrop-blur-md z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <a href="/" class="text-lg sm:text-xl font-bold tracking-tight text-blue-900 serif-font">Aftab Shaukat Research</a>
@@ -234,7 +266,8 @@
                     <a href="#care-management" class="text-sm font-medium text-slate-600 hover:text-blue-700">CCM/PCM/TCM</a>
                     <a href="#regulatory" class="text-sm font-medium text-slate-600 hover:text-blue-700">NCD/LCD</a>
                     <a href="#edi" class="text-sm font-medium text-slate-600 hover:text-blue-700">EDI</a>
-                    <a href="#publication-standards" class="text-sm font-medium text-slate-600 hover:text-blue-700">Standards</a>                    <a href="#simulator" class="text-sm font-medium text-blue-700 hover:text-blue-900">Impact Model</a>
+                    <a href="#publication-standards" class="text-sm font-medium text-slate-600 hover:text-blue-700">Standards</a>
+                    <a href="#simulator" class="text-sm font-medium text-blue-700 hover:text-blue-900">Impact Model</a>
                 </div>
             </div>
         </div>
@@ -1151,10 +1184,6 @@ Then -> US FINANCIAL REVENUE LAYER
             rcmSlider.addEventListener('input', calculateImpact);
 
             calculateImpact();
-
-            %`;
-                }
-            }
 
             const reveals = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
