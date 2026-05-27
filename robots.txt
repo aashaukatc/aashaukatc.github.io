@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aftabshaukat.me/sitemap.xml
