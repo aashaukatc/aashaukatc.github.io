@@ -76,6 +76,13 @@
         .text-slate-600, .text-slate-500, .text-slate-400 {
             color: var(--muted) !important;
         }
+        .text-slate-600 {
+            color: #d3cbc0 !important;
+        }
+        .text-slate-500,
+        .text-slate-400 {
+            color: #c4bcaf !important;
+        }
         .text-blue-900 {
             color: #dfeeff !important;
         }
@@ -93,6 +100,26 @@
             border-bottom: 2px solid #74b8ff;
             color: #9fcdff;
             font-weight: 600;
+        }
+        nav.main-nav {
+            background: rgba(13, 17, 24, 0.92) !important;
+            border-bottom: 1px solid var(--line) !important;
+        }
+        nav.main-nav a.text-slate-600 {
+            color: #e5ddd1 !important;
+        }
+        nav.main-nav a.text-slate-600:hover {
+            color: #b7d7ff !important;
+        }
+        nav.main-nav a.text-blue-700 {
+            color: #7bb6ff !important;
+        }
+        thead.bg-slate-100 {
+            background: rgba(60, 78, 106, 0.72) !important;
+        }
+        thead.bg-slate-100 th {
+            color: #eef5ff !important;
+            font-weight: 700;
         }
         .chart-container {
             position: relative;
@@ -213,7 +240,7 @@
 <body class="antialiased">
     <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
 
-    <nav class="fixed w-full bg-white/95 backdrop-blur-md border-b border-slate-200 z-50 shadow-sm">
+    <nav class="main-nav fixed w-full bg-white/95 backdrop-blur-md border-b border-slate-200 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <a href="/" class="text-lg sm:text-xl font-bold tracking-tight text-blue-900 serif-font">Aftab Shaukat Research</a>
