@@ -14,13 +14,85 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet" />
 
     <style>
+        :root {
+            --bg: #0f1115;
+            --panel: rgba(23, 27, 34, 0.7);
+            --panel-soft: rgba(17, 21, 27, 0.65);
+            --line: rgba(245, 241, 232, 0.14);
+            --text: #f5f1e8;
+            --muted: #b9b0a2;
+            --gold: #d3a85c;
+            --blue: #7bb6ff;
+        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC;
-            color: #0F172A;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(211, 168, 92, 0.18), transparent 32%),
+                radial-gradient(circle at 100% 10%, rgba(123, 182, 255, 0.18), transparent 32%),
+                var(--bg);
+            color: var(--text);
+            position: relative;
+        }
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 380px;
+            height: 380px;
+            border-radius: 999px;
+            z-index: -1;
+            filter: blur(85px);
+            opacity: 0.18;
+            pointer-events: none;
+        }
+        body::before {
+            top: -120px;
+            right: -80px;
+            background: #74b8ff;
+        }
+        body::after {
+            bottom: -120px;
+            left: -80px;
+            background: #d3a85c;
         }
         h1, h2, h3, .serif-font {
             font-family: 'Merriweather', serif;
+        }
+        .bg-white {
+            background: var(--panel) !important;
+            backdrop-filter: blur(14px);
+            border-color: var(--line) !important;
+        }
+        .bg-slate-50, .bg-slate-50\/70, .bg-slate-50\/50 {
+            background: var(--panel-soft) !important;
+            border-color: var(--line) !important;
+        }
+        .border-slate-200, .border-slate-100 {
+            border-color: var(--line) !important;
+        }
+        .text-slate-900, .text-slate-800, .text-slate-700 {
+            color: var(--text) !important;
+        }
+        .text-slate-600, .text-slate-500, .text-slate-400 {
+            color: var(--muted) !important;
+        }
+        .text-blue-900 {
+            color: #dfeeff !important;
+        }
+        .text-blue-700 {
+            color: var(--blue) !important;
+        }
+        .bg-blue-50 {
+            background: rgba(59, 130, 246, 0.14) !important;
+            border-color: rgba(123, 182, 255, 0.26) !important;
+        }
+        .bg-blue-700 {
+            background: linear-gradient(90deg, rgba(76, 135, 255, 0.94), rgba(87, 158, 255, 0.94)) !important;
+        }
+        .tab-btn.active {
+            border-bottom: 2px solid #74b8ff;
+            color: #9fcdff;
+            font-weight: 600;
         }
         .chart-container {
             position: relative;
@@ -36,16 +108,12 @@
                 height: 410px;
             }
         }
-        .tab-btn.active {
-            border-bottom: 2px solid #2563EB;
-            color: #1D4ED8;
-            font-weight: 600;
-        }
         .mini-code {
             font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-            background: #0F172A;
-            color: #E2E8F0;
+            background: rgba(12, 16, 23, 0.9);
+            color: #e2e8f0;
             border-radius: 12px;
+            border: 1px solid var(--line);
             padding: 0.9rem;
             font-size: 0.82rem;
             line-height: 1.45;
@@ -68,6 +136,8 @@
                     <a href="#varieties" class="text-sm font-medium text-slate-600 hover:text-blue-700">RPM vs RTM</a>
                     <a href="#architecture" class="text-sm font-medium text-slate-600 hover:text-blue-700">Architecture</a>
                     <a href="#billing" class="text-sm font-medium text-slate-600 hover:text-blue-700">Billing Policy</a>
+                    <a href="#care-management" class="text-sm font-medium text-slate-600 hover:text-blue-700">CCM/PCM/TCM</a>
+                    <a href="#regulatory" class="text-sm font-medium text-slate-600 hover:text-blue-700">NCD/LCD</a>
                     <a href="#edi" class="text-sm font-medium text-slate-600 hover:text-blue-700">EDI</a>
                     <a href="#simulator" class="text-sm font-medium text-blue-700 hover:text-blue-900">Impact Model</a>
                 </div>
@@ -343,9 +413,144 @@ Then -> US FINANCIAL REVENUE LAYER
             </div>
         </section>
 
+        <section id="care-management" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900">6) CCM, PCM, TCM, and Other Care Management Services</h2>
+                <p class="mt-3 text-lg text-slate-600 max-w-4xl">Remote monitoring programs perform best when they are embedded inside broader care-management billing architecture. The table below adds national 2026 RVU context for planning, staffing, and margin modeling.</p>
+            </div>
+
+            <div class="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm">
+                <h3 class="text-xl font-bold text-blue-900 mb-4">2026 RVU Map (CMS PPRRVU2026 Jan, non-QPP national file)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="p-3 text-left">Service Family</th>
+                                <th class="p-3 text-left">Codes</th>
+                                <th class="p-3 text-left">Operational Trigger</th>
+                                <th class="p-3 text-left">Total RVU (Non-Fac / Fac)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-700">
+                            <tr class="border-t border-slate-200">
+                                <td class="p-3 font-semibold">RPM Treatment Mgmt</td>
+                                <td class="p-3">99457 / 99458</td>
+                                <td class="p-3">Interactive communication + monthly treatment management time.</td>
+                                <td class="p-3">1.55 / 0.79 ; 1.24 / 0.79</td>
+                            </tr>
+                            <tr class="border-t border-slate-200 bg-slate-50">
+                                <td class="p-3 font-semibold">RTM Treatment Mgmt</td>
+                                <td class="p-3">98980 / 98981</td>
+                                <td class="p-3">Therapeutic monitoring communication and management time.</td>
+                                <td class="p-3">1.62 / 0.77 ; 1.24 / 0.76</td>
+                            </tr>
+                            <tr class="border-t border-slate-200">
+                                <td class="p-3 font-semibold">CCM (staff)</td>
+                                <td class="p-3">99490 / +99439</td>
+                                <td class="p-3">Multiple chronic conditions, care plan, monthly staff-directed time.</td>
+                                <td class="p-3">1.98 / 1.31 ; 1.51 / 0.92</td>
+                            </tr>
+                            <tr class="border-t border-slate-200 bg-slate-50">
+                                <td class="p-3 font-semibold">CCM (physician/QHP)</td>
+                                <td class="p-3">99491 / +99437</td>
+                                <td class="p-3">Personally performed practitioner time thresholds.</td>
+                                <td class="p-3">2.67 / 1.96 ; 1.89 / 1.31</td>
+                            </tr>
+                            <tr class="border-t border-slate-200">
+                                <td class="p-3 font-semibold">Complex CCM</td>
+                                <td class="p-3">99487 / +99489</td>
+                                <td class="p-3">Moderate/high complexity MDM + expanded monthly care-management work.</td>
+                                <td class="p-3">4.32 / 2.37 ; 2.34 / 1.31</td>
+                            </tr>
+                            <tr class="border-t border-slate-200 bg-slate-50">
+                                <td class="p-3 font-semibold">PCM</td>
+                                <td class="p-3">99424, 99425, 99426, 99427</td>
+                                <td class="p-3">Single high-risk chronic condition with focused monthly management.</td>
+                                <td class="p-3">Range: 1.62–2.62 non-fac; 0.94–1.94 fac</td>
+                            </tr>
+                            <tr class="border-t border-slate-200">
+                                <td class="p-3 font-semibold">TCM</td>
+                                <td class="p-3">99495 / 99496</td>
+                                <td class="p-3">Post-discharge 30-day transition period + required timelines.</td>
+                                <td class="p-3">6.59 / 3.66 ; 8.94 / 4.98</td>
+                            </tr>
+                            <tr class="border-t border-slate-200 bg-slate-50">
+                                <td class="p-3 font-semibold">BHI / CoCM</td>
+                                <td class="p-3">99484, 99492, 99493, 99494</td>
+                                <td class="p-3">Behavioral health integration and collaborative care management.</td>
+                                <td class="p-3">1.72, 4.80, 4.34, 1.84 (non-fac)</td>
+                            </tr>
+                            <tr class="border-t border-slate-200">
+                                <td class="p-3 font-semibold">APCM / PIN / CHI / CPM</td>
+                                <td class="p-3">G0556-58, G0023-24, G0019-22, G3002-03</td>
+                                <td class="p-3">Advanced primary care, principal illness navigation, SDOH/community health integration, chronic pain mgmt.</td>
+                                <td class="p-3">Non-fac range: 0.49–3.51</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-slate-500 mt-4">RVU reference source: CMS 2026 National Physician Fee Schedule Relative Value File (January release, non-QPP), conversion factor field shown as 33.4009 in-file. Locality, MPFS status indicators, and payer edits still control actual payment.</p>
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Billing Guidelines That Affect Stack Design</h3>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                        <li>At least one live interactive communication is expected for RPM/RTM treatment-management codes in the month.</li>
+                        <li>RPM and RTM generally are not billed together for the same patient in the same 30-day period.</li>
+                        <li>RPM/RTM can coexist with CCM, PCM, TCM, and BHI service families only if time and effort are not double counted.</li>
+                        <li>TCM requires communication within 2 business days and a face-to-face visit within 14 days (99495) or 7 days (99496), with required MDM level.</li>
+                        <li>Only one practitioner may bill RPM per patient in a 30-day period under standard Medicare guidance.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Engineering Requirements</h3>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                        <li>Maintain code-family exclusivity matrix (RPM vs RTM vs PCM/CCM overlaps).</li>
+                        <li>Track clock ownership by service family to prevent time collisions in monthly claims.</li>
+                        <li>Enforce workflow checkpoints for TCM timing events and discharge-source qualification.</li>
+                        <li>Emit claim-time warnings for missing communication evidence or unsupported chronic-condition linkage.</li>
+                        <li>Version all code rules by effective date, MAC jurisdiction, and payer contract id.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="regulatory" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900">7) NCD/LCD, CMS, and Regulator Governance</h2>
+                <p class="mt-3 text-lg text-slate-600 max-w-4xl">Coverage and payment are distinct decisions. Build your policy engine to evaluate national policy first (NCD), then MAC-level local policy (LCD and Billing/Coding Articles), then contract-specific edits.</p>
+            </div>
+
+            <div class="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-sm text-slate-700">
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">Coverage Decision Ladder</h3>
+                        <ul class="space-y-2">
+                            <li><strong>NCD (CMS national):</strong> binding national coverage decisions across contractors.</li>
+                            <li><strong>LCD (MAC local):</strong> jurisdiction-specific reasonable-and-necessary coverage determinations.</li>
+                            <li><strong>Billing & Coding Articles:</strong> code pairings and documentation refinements paired with LCD intent.</li>
+                            <li><strong>Payer contract overlays:</strong> MA/commercial plan edits and prior-auth constraints.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">Regulatory Stakeholders to Model</h3>
+                        <ul class="space-y-2">
+                            <li><strong>CMS:</strong> MPFS rules, manuals, MLN guidance, coverage process.</li>
+                            <li><strong>MACs:</strong> LCDs and claims processing expectations by jurisdiction.</li>
+                            <li><strong>HHS OIG:</strong> fraud, waste, and abuse oversight focus areas (including remote monitoring).</li>
+                            <li><strong>HHS OCR:</strong> HIPAA privacy/security enforcement.</li>
+                            <li><strong>FDA:</strong> medical-device definition and device-regulated product pathways.</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 mt-5">Governance design pattern: policy parser -> effective-date ruleset -> code+diagnosis validation -> claim scrubber -> denial telemetry loop -> monthly policy refresh cadence.</p>
+            </div>
+        </section>
+
         <section id="edi" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-slate-900">6) EDI Architecture: 837P, 837I, and 835 Mapping</h2>
+                <h2 class="text-3xl font-bold text-slate-900">8) EDI Architecture: 837P, 837I, and 835 Mapping</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">The difference between high denial rates and predictable cash often lives in loop-level EDI precision.</p>
             </div>
 
@@ -394,7 +599,7 @@ Then -> US FINANCIAL REVENUE LAYER
 
         <section id="authority" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">Authority, Trust, and Governance Layer</h2>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">9) Authority, Trust, and Governance Layer</h2>
                 <p class="text-slate-600 mb-4">This blueprint is designed for practice-management and technology transformation teams building remote monitoring pipelines in the U.S. healthcare ecosystem.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm text-slate-700">
                     <div class="bg-slate-50 rounded-xl p-5 border border-slate-200">
@@ -422,7 +627,7 @@ Then -> US FINANCIAL REVENUE LAYER
 
         <section id="simulator" class="mt-20 mb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-slate-900">7) Interactive Financial Impact Simulator</h2>
+                <h2 class="text-3xl font-bold text-slate-900">10) Interactive Financial Impact Simulator</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">Model expected annual impact from AI triage efficiency plus revenue-cycle recovery discipline for a remote monitoring vendor.</p>
             </div>
 
@@ -479,7 +684,7 @@ Then -> US FINANCIAL REVENUE LAYER
 
         <section id="charts" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-slate-900">8) Operational Signal Visuals</h2>
+                <h2 class="text-3xl font-bold text-slate-900">11) Operational Signal Visuals</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl">Two practical signals for executive teams: scaling economics and event composition.</p>
             </div>
 
@@ -497,7 +702,7 @@ Then -> US FINANCIAL REVENUE LAYER
 
         <section id="build-path" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-8 text-center">
-                <h2 class="text-3xl font-bold text-slate-900">9) Build Path for Vendor Integration</h2>
+                <h2 class="text-3xl font-bold text-slate-900">12) Build Path for Vendor Integration</h2>
                 <p class="mt-3 text-lg text-slate-600 max-w-4xl mx-auto">A staged transformation map for U.S. healthcare practices and remote-monitoring technology vendors.</p>
             </div>
 
@@ -541,6 +746,34 @@ Then -> US FINANCIAL REVENUE LAYER
                 </div>
             </div>
         </section>
+
+        <section id="copyright-credits" class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Code-Set Copyright, Credits, and Compliance Notice</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700">
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Ownership Clarification</h3>
+                        <ul class="space-y-2">
+                            <li><strong>CPT codes:</strong> copyright American Medical Association (AMA), all rights reserved.</li>
+                            <li><strong>HCPCS Level II:</strong> maintained by CMS (D-codes maintained by the American Dental Association).</li>
+                            <li><strong>ICD-10-CM:</strong> U.S. clinical modification used under HIPAA transactions.</li>
+                            <li><strong>AAPC:</strong> major education/certification body in coding, but not owner of CPT code copyrights.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Primary Public Sources Used</h3>
+                        <ul class="space-y-2">
+                            <li><a class="text-blue-700 hover:underline" href="https://www.cms.gov/files/zip/rvu26a-updated-12-29-2025.zip" target="_blank">CMS 2026 RVU File (January release)</a></li>
+                            <li><a class="text-blue-700 hover:underline" href="https://www.cms.gov/outreach-and-education/medicare-learning-network-mln/mlnproducts/downloads/chroniccaremanagement.pdf" target="_blank">CMS MLN: Chronic Care Management</a></li>
+                            <li><a class="text-blue-700 hover:underline" href="https://www.cms.gov/files/document/mln908628-transitional-care-management-services.pdf" target="_blank">CMS MLN: Transitional Care Management</a></li>
+                            <li><a class="text-blue-700 hover:underline" href="https://www.cms.gov/files/document/mln901705-telehealth-remote-patient-monitoring.pdf" target="_blank">CMS MLN: Telehealth & Remote Monitoring</a></li>
+                            <li><a class="text-blue-700 hover:underline" href="https://www.cms.gov/medicare-coverage-database/search.aspx" target="_blank">CMS Medicare Coverage Database (NCD/LCD)</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 mt-5">All rates and policy statements here are implementation-planning references. Production billing requires current-date validation across CMS transmittals, MAC bulletins, payer contracts, and legal/compliance review.</p>
+            </div>
+        </section>
     </main>
 
     <footer class="bg-slate-900 py-12 border-t border-slate-800 mt-12">
@@ -549,7 +782,7 @@ Then -> US FINANCIAL REVENUE LAYER
                 Research & Architecture by <a href="https://aftabshaukat.me/" target="_blank" class="text-blue-400 hover:underline">Aftab Shaukat</a><br />
                 Published under Public Research Assets · Last updated: May 27, 2026
             </p>
-            <p class="text-slate-500 text-xs mt-2">Reference families include CMS remote monitoring guidance, Medicare manuals, CPT/HCPCS/ICD standards, and ANSI X12 EDI structures. Final billing decisions require active policy verification.</p>
+            <p class="text-slate-500 text-xs mt-2">CPT copyright AMA. HCPCS Level II maintained by CMS (D-codes by ADA). MLN, MLN Connects, and MLN Matters are trademarks of HHS. Final billing decisions require active policy verification.</p>
         </div>
     </footer>
 
