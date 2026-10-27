@@ -1,39 +1,46 @@
-# AftabShaukat.me
+# AftabShaukat.me — professional portfolio
 
-Primary professional portfolio and résumé anchor for Muhammad Aftab Shaukat.
+Canonical professional website for **Muhammad Aftab Shaukat**. Healthcare RCM · Operations · Data · Systems · AI.
 
-## Public pages
+- Live domain: [aftabshaukat.me](https://aftabshaukat.me/)
+- Hosting: GitHub Pages (static)
+- Profile and career data source: [aashaukatc/aashaukatc](https://github.com/aashaukatc/aashaukatc)
 
-- `/` — healthcare RCM, operations, data systems, selected work, experience, research, and contact.
-- `/resume.html` — permanent browser and print-ready professional résumé.
-- `/hospice-nursing-home-billing-rcm.html` — post-acute billing and RCM research.
-- `/remote-monitoring-rcm-architecture.html` — remote-monitoring revenue architecture research.
+## Site map
 
-## Source of truth
+| Route | Purpose |
+|---|---|
+| `/` | Premium homepage, validated operating scope and illustrative dashboard |
+| `/services.html` | Healthcare RCM, business analysis, systems and AI capabilities |
+| `/work.html` | Filterable portfolio and public project references |
+| `/about.html` | Professional background, platform expertise and method |
+| `/contact.html` | Consultation inquiry with working mailto fallback |
+| `/resume.html` | Permanent print-ready professional résumé (preserved) |
+| `/hospice-nursing-home-billing-rcm.html` | Public post-acute billing research (preserved) |
+| `/remote-monitoring-rcm-architecture.html` | Public RPM/RTM research (preserved) |
+| `/sehatyaab-*.html` | Existing visual product samples (preserved) |
 
-Durable career facts are governed in [aashaukatc/aashaukatc](https://github.com/aashaukatc/aashaukatc):
+## Front end
 
-- `resumes/resume.json` — verified career data.
-- `brand/career-profile-source.json` — cross-platform positioning.
-- `brand/linkedin-profile-kit.md` — recruiter-facing LinkedIn copy.
+- `assets/css/portfolio-v2.css`: responsive design tokens, layouts, gradients and cards.
+- `assets/js/portfolio-v2.js`: accessible mobile navigation, filterable portfolio, scroll effects and form behavior.
+- Plain HTML, CSS and JavaScript; no bundler or runtime dependencies.
 
-This website is the primary public narrative. The GitHub profile, LinkedIn, and ORCID should link back here and use the same verified positioning.
+The homepage's dashboard **is a demonstration, not a live analytics product**. Trend visuals are synthetic. Operating-scope numbers are from the canonical career record, and are explicitly distinguished from demo charts.
 
-## Public-content standard
+## Contact handling
 
-- Lead with verified experience, evidence, and finished public work.
-- Do not publish internal plans, working notes, placeholders, status percentages, private client data, PHI, credentials, or confidential screenshots.
-- Do not describe experiments as established businesses or products.
-- Do not claim publication acceptance, indexing, certifications, or compliance status unless formally verified.
-- Keep research caveats and source dates current.
+The default form opens the visitor's email application with their inquiry pre-filled. **The visitor must press Send.** No backend endpoint is presented as live unless it has actually been configured. For optional server-side handling, see `worker/index.js` and `docs/contact-backend.md`.
 
-## Design
+## Public publishing standard
 
-Static GitHub Pages implementation with code-native HTML, CSS, and JavaScript. The visual system uses a true-white editorial canvas, high-contrast navy typography, restrained cobalt and orange accents, and print-ready résumé styling.
+- Do not invent work history, credentials, awards, reviews, clients or outcomes.
+- Sanitize or synthesize PHI, PII, confidential data and screenshots before publication.
+- Do not expose internal planning notes, API keys or unpublished commercial assumptions.
+- Keep project lifecycle labels honest (research, concept, initiative, released product).
+- Preserve canonical career facts from `resumes/resume.json` and `brand/career-profile-source.json` in the linked profile repository.
+- Preserve research caveats and source dates; no unverified claim of formal journal publication.
 
-## Deployment
+## GitHub Pages
 
-- Repository: `aashaukatc/aashaukatc.github.io`
-- Domain: [aftabshaukat.me](https://aftabshaukat.me/)
-- Hosting: GitHub Pages
-- Domain mapping: `CNAME`
+`CNAME` remains `aftabshaukat.me`; the GitHub Pages build deploys from the configured publication source. The URL structure is intentionally stable for SEO and existing links. Review changes on a feature branch, validate, then merge to main.
