@@ -1,5 +1,6 @@
 (()=>{
  'use strict';
+ document.documentElement.classList.add('js');
  const btn=document.querySelector('[data-menu-toggle]'),menu=document.querySelector('[data-nav]');
  const closeMenu=()=>{btn?.setAttribute('aria-expanded','false');menu?.classList.remove('open');};
  btn?.addEventListener('click',()=>{const isOpen=btn.getAttribute('aria-expanded')==='true';btn.setAttribute('aria-expanded',String(!isOpen));menu?.classList.toggle('open',!isOpen)});
@@ -36,7 +37,7 @@
    try{
     const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:fullName,email,service,message})});
     if(!response.ok)throw new Error('contact');
-    if(status)status.textContent='Your inquiry was delivered. Thank you.';
+    if(status)status.textContent='Your inquiry was accepted for delivery. Thank you.';
     form.reset();return;
    }catch(err){if(status)status.textContent='Secure delivery is unavailable. Opening your email app instead.'}
    finally{submit.disabled=false}
